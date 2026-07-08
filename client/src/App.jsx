@@ -1,13 +1,12 @@
-import './App.css'
-import { Button } from "@/components/ui/button"
-import Login from './pages/Login'
+import "./App.css";
+import Login from "./pages/Login";
 
 function App() {
   return (
-     <main>
-      <Login/>
-     </main>
-  )
+    <main>
+      <Login />
+    </main>
+  );
 }
 
-export default App
+export default App;
