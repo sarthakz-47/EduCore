@@ -60,7 +60,7 @@ const Profile = () => {
 
   if (isLoading) return <h1>Profile Loading...</h1>;
 
-  const { user } = data;
+  const user = data && data.user;
 
   return (
     <div className="max-w-4xl mx-auto px-4 my-24">
