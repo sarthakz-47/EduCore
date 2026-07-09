@@ -1,0 +1,125 @@
+import { Loader2 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Course from "./Course";
+
+const Profile = () => {
+  const isLoading = false;
+  const enrolledCourses = [1];
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 my-24">
+      <h1 className="text-2xl font-bold text-center md:text-left">Profile</h1>
+
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
+        <div className="flex flex-col items-center">
+          <Avatar className="h-28 w-28 md:h-32 md:w-32">
+            <AvatarImage
+              src={"https://github.com/shadcn.png"}
+              alt="Profile"
+              className="grayscale"
+            />
+            <AvatarFallback>SJ</AvatarFallback>
+          </Avatar>
+        </div>
+
+        {/* User Details */}
+        <div className="space-y-2">
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
+            Name:
+            <span className="ml-2 font-normal text-gray-700 dark:text-gray-300">
+              Sarthak Jadhav
+            </span>
+          </p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
+            Email:
+            <span className="ml-2 font-normal text-gray-700 dark:text-gray-300">
+              sarthak.jadhav@example.com
+            </span>
+          </p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
+            Role:
+            <span className="ml-2 font-normal text-gray-700 dark:text-gray-300">
+              Instructor
+            </span>
+          </p>
+
+          {/* Edit Profile */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm">Edit Profile</Button>
+            </DialogTrigger>
+
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Edit Profile</DialogTitle>
+                <DialogDescription>
+                  Update your profile details below and save your changes.
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    type="text"
+                    placeholder="Enter your name"
+                    className="col-span-3"
+                  />
+                </div>
+
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="profilePhoto">Profile Photo</Label>
+                  <Input type="file" accept="image/*" className="col-span-3" />
+                </div>
+              </div>
+
+              <DialogFooter>
+                <Button disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait...
+                    </>
+                  ) : (
+                    "Save Changes"
+                  )}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+
+      {/* Enrolled Courses */}
+      <div className="mt-12">
+        <h2 className="text-xl font-semibold">Courses You're Enrolled In</h2>
+
+        {enrolledCourses.length === 0 ? (
+          <p className="mt-4 text-gray-500 dark:text-gray-400">
+            You haven't enrolled in any courses yet.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            {enrolledCourses.map((course, index) => (
+              <Course />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Profile;
