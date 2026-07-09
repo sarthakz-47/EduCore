@@ -17,7 +17,7 @@ import {
   useLoadUserQuery,
   useUpdateUserMutation,
 } from "@/features/api/authApi";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const Profile = () => {
@@ -49,6 +49,10 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    refetch();
+  }, []);
+
+  useEffect(() => {
     if (isSuccess) {
       refetch();
       toast.success(data.message || "Profile updated.");
@@ -70,7 +74,7 @@ const Profile = () => {
         <div className="flex flex-col items-center">
           <Avatar className="h-28 w-28 md:h-32 md:w-32">
             <AvatarImage
-              src={user.photoUrl || "https://github.com/shadcn.png"}
+              src={user?.photoUrl || "https://github.com/shadcn.png"}
               alt="Profile"
             />
             <AvatarFallback>SJ</AvatarFallback>
