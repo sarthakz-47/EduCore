@@ -63,7 +63,7 @@ const AddCourse = () => {
           />
         </div>
         <div>
-          <Label>Course Category</Label>
+          <Label>Category</Label>
           <Select onValueChange={getSelectedCategory}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select a category" />

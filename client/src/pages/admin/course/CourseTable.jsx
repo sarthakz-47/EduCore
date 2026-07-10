@@ -5,7 +5,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -47,7 +46,11 @@ const CourseTable = () => {
               </TableCell>
               <TableCell>{course.courseTitle}</TableCell>
               <TableCell className="text-right">
-                <Button size="sm" variant="ghost">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => navigate(`${course._id}`)}
+                >
                   <Edit />
                 </Button>{" "}
               </TableCell>
