@@ -3,13 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 
-const Course = () => {
+const Course = ({ course }) => {
   return (
     <div>
       <Card className="overflow-hidden rounded-lg dark:bg-gray-800 bg-white shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 p-0">
         <div className="relative">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuZEkt45KrWgCAzgP3pPz3aHVA781zN4vVeijCK_hGbgsSz0Lr4g3-9O8&s=10"
+            src={course.courseThumbnail}
             alt="course"
             className="w-full h-36 object-cover rounded-t-lg"
           />
@@ -17,26 +17,28 @@ const Course = () => {
 
         <CardContent className="mt-2 px-5 py-4 space-y-3">
           <h1 className="hover:underline font-bold text-lg truncate">
-            NextJS Complete Course in Hindi 2026
+            {course.courseTitle}
           </h1>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src={
+                    course.creator?.photoUrl || "https://github.com/shadcn.png"
+                  }
                   alt="@shadcn"
                   className="grayscale"
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <h1 className="font-medium text-sm">Sarthak Jadhav</h1>
+              <h1 className="font-medium text-sm">{course.creator?.name}</h1>
             </div>
             <Badge className="bg-blue-600 text-white px-2 py-1 text-xs rounded-full">
-              Advanced
+              {course.courseLevel}
             </Badge>
           </div>
           <div className="text-lg font-bold">
-            <span>₹499</span>
+            <span>{course.coursePrice}</span>
           </div>
         </CardContent>
       </Card>
