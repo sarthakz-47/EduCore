@@ -21,6 +21,7 @@ import {
 import {
   useEditCourseMutation,
   useGetCourseByIdQuery,
+  usePublishCourseMutation,
 } from "@/features/api/courseApi";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -39,9 +40,13 @@ const CourseTab = () => {
   });
   const params = useParams();
   const courseId = params.courseId;
-  const { data: courseByIdData, isLoading: courseByIdLoading } =
-    useGetCourseByIdQuery(courseId);
+  const {
+    data: courseByIdData,
+    isLoading: courseByIdLoading,
+    refetch,
+  } = useGetCourseByIdQuery(courseId);
 
+  const [publishCourse, {}] = usePublishCourseMutation();
   useEffect(() => {
     if (courseByIdData?.course) {
       const course = courseByIdData?.course;
@@ -97,6 +102,18 @@ const CourseTab = () => {
     await editCourse({ formData, courseId });
   };
 
+  const publishStatusHandler = async (action) => {
+    try {
+      const response = await publishCourse({ courseId, query: action });
+      if (response.data) {
+        refetch();
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to publish or unpublish course");
+    }
+  };
+
   useEffect(() => {
     if (isSuccess) {
       toast.success(data.message || "Course updated Succefully!");
@@ -108,8 +125,6 @@ const CourseTab = () => {
 
   if (courseByIdLoading) return <h1>Loading...</h1>;
 
-  const isPublished = false;
-
   return (
     <Card className="overflow-visible">
       <CardHeader className="flex flex-row justify-between items-start">
@@ -120,8 +135,15 @@ const CourseTab = () => {
           </CardDescription>
         </div>
         <div className="flex gap-4">
-          <Button variant="outline">
-            {isPublished ? "Unpublish" : "Publish"}
+          <Button
+            variant="outline"
+            onClick={() =>
+              publishStatusHandler(
+                courseByIdData?.course.isPublished ? "false" : "true",
+              )
+            }
+          >
+            {courseByIdData?.course.isPublished ? "Unpublish" : "Publish"}
           </Button>
           <Button>Remove Course</Button>
         </div>
