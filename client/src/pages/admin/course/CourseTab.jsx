@@ -136,6 +136,7 @@ const CourseTab = () => {
         </div>
         <div className="flex gap-4">
           <Button
+            disabled={courseByIdData?.course.lectures.length === 0}
             variant="outline"
             onClick={() =>
               publishStatusHandler(
