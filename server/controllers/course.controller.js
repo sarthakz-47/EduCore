@@ -200,8 +200,8 @@ export const editLecture = async (req, res) => {
     // update lecture
     if (lectureTitle) lecture.lectureTitle = lectureTitle;
     if (videoInfo?.videoUrl) lecture.videoUrl = videoInfo.videoUrl;
-    if (videoInfo.publicId) lecture.publicId = videoInfo.publicId;
-    if (isPreviewFree) lecture.isPreviewFree = isPreviewFree;
+    if (videoInfo?.publicId) lecture.publicId = videoInfo.publicId;
+    lecture.isPreviewFree = isPreviewFree;
 
     await lecture.save();
 
