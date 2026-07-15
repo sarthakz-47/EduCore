@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const categories = [
   { id: "Next JS", label: "Next JS" },
@@ -31,21 +31,20 @@ const Filter = ({ handleFilterChange }) => {
   const [sortByPrice, setSortByPrice] = useState("");
 
   const handleCategoryChange = (categoryId) => {
-    setSelectedCategories((prevCategories) => {
-      const newCategories = prevCategories.includes(categoryId)
+    setSelectedCategories((prevCategories) =>
+      prevCategories.includes(categoryId)
         ? prevCategories.filter((id) => id !== categoryId)
-        : [...prevCategories, categoryId];
-
-      handleFilterChange(newCategories, sortByPrice);
-      return newCategories;
-    });
+        : [...prevCategories, categoryId],
+    );
   };
 
   const selectByPriceHandler = (selectedValue) => {
     setSortByPrice(selectedValue);
-    handleFilterChange(selectedCategories, selectedValue);
   };
 
+  useEffect(() => {
+    handleFilterChange(selectedCategories, sortByPrice);
+  }, [selectedCategories, sortByPrice]);
   return (
     <div className="w-full md:w-[20%]">
       <div className="flex items-center justify-between">
@@ -67,7 +66,7 @@ const Filter = ({ handleFilterChange }) => {
       <div>
         <h1 className="font-semibold mb-2">CATEGORY</h1>
         {categories.map((category) => (
-          <div className="flex items-center space-x-2 my-2">
+          <div key={category.id} className="flex items-center space-x-2 my-2">
             <Checkbox
               id={category.id}
               onCheckedChange={() => handleCategoryChange(category.id)}

@@ -129,8 +129,8 @@ const CourseProgress = () => {
                 key={lecture._id}
                 className={`mb-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 ${
                   lecture._id === (currentLecture?._id || initialLecture._id)
-                    ? "bg-gray-200"
-                    : "dark:bg-gray-800"
+                    ? "bg-gray-200 dark:dark:bg-gray-800"
+                    : ""
                 }`}
                 onClick={() => handelSelctLecture(lecture)}
               >
