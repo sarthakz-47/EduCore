@@ -34,7 +34,7 @@ const appRouter = createBrowserRouter([
       { path: "my-learning", element: <MyLearning /> },
       { path: "profile", element: <Profile /> },
       { path: "course-detail/:courseId", element: <CourseDetail /> },
-      { path: "course-progress/:progress", element: <CourseProgress /> },
+      { path: "course-progress/:courseId", element: <CourseProgress /> },
       // admin routes starts frm here:
       {
         path: "admin",

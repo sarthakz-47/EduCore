@@ -86,7 +86,7 @@ const CourseDetail = () => {
                 <ReactPlayer
                   width="100%"
                   height="100%"
-                  src={course.lectures[1].videoUrl}
+                  src={course.lectures[0].videoUrl}
                   controls={true}
                 />
               </div>
