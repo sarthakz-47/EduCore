@@ -119,7 +119,7 @@ const CourseTab = () => {
       toast.success(data.message || "Course updated Succefully!");
     }
     if (error) {
-      toast.error(error.data || "Failed to updated course.");
+      toast.error(error.data.message || "Failed to updated course.");
     }
   }, [isSuccess, error]);
 
@@ -185,7 +185,10 @@ const CourseTab = () => {
         <div className="flex flex-wrap items-center gap-6">
           <div className="space-y-2">
             <Label>Category</Label>
-            <Select onValueChange={selectCategory}>
+            <Select
+              defaultValue={input.category}
+              onValueChange={selectCategory}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
@@ -215,7 +218,10 @@ const CourseTab = () => {
 
           <div className="space-y-2">
             <Label>Course Level</Label>
-            <Select onValueChange={selectCourseLevel}>
+            <Select
+              defaultValue={input.courseLevel}
+              onValueChange={selectCourseLevel}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a course level" />
               </SelectTrigger>
@@ -268,6 +274,7 @@ const CourseTab = () => {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please Wait...
               </>
             ) : (
               "Save"

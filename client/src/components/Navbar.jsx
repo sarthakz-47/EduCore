@@ -40,7 +40,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(data.message || "Logout successful");
+      toast.success(data?.message || "Logout successful");
       navigate("/login");
     }
   }, [isSuccess]);

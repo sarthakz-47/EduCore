@@ -17,7 +17,7 @@ import {
   useLoadUserQuery,
   useUpdateUserMutation,
 } from "@/features/api/authApi";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const Profile = () => {
@@ -55,7 +55,7 @@ const Profile = () => {
   useEffect(() => {
     if (isSuccess) {
       refetch();
-      toast.success(data.message || "Profile updated.");
+      toast.success(updateUserData.message || "Profile updated.");
     }
     if (isError) {
       toast.error(error.message || "Failed to update.");

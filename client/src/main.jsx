@@ -4,9 +4,9 @@ import "./index.css";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { appStore } from "./app/store";
-import { Toaster } from "sonner";
 import { useLoadUserQuery } from "./features/api/authApi";
 import LoadingSpinner from "./components/LoadingSpinner";
+import { Toaster } from "./components/ui/sonner";
 
 const Custom = ({ children }) => {
   const { isLoading } = useLoadUserQuery();
