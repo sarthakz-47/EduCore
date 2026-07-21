@@ -126,7 +126,3 @@ Use the [Stripe CLI](https://stripe.com/docs/stripe-cli) to forward events to yo
 ```bash
 stripe listen --forward-to localhost:3000/api/v1/purchase/webhook
 ```
-
-## License
-
-This project currently has no explicit license. Add one if you plan to open source it.
