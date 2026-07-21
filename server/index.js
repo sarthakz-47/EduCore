@@ -16,6 +16,7 @@ const app = express();
 
 const _dirname = path.resolve();
 
+app.use("/api/v1/purchase/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
