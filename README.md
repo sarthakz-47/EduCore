@@ -58,7 +58,7 @@ CVC: any 3 digits
 
 ### Admin Dashboard
 
-![Admin Dashboard](assets/Dashboard.png)
+![Admin Dashboard](assets/Dashborad.png)
 
 ### Checkout
 
