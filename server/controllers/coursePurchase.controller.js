@@ -122,14 +122,14 @@ export const stripeWebhook = async (req, res) => {
       await User.findByIdAndUpdate(
         purchase.userId,
         { $addToSet: { enrolledCourses: purchase.courseId._id } },
-        { new: true },
+        { returnDocument: "after" },
       );
 
       // Update course to add user ID to enrolledStudents
       await Course.findByIdAndUpdate(
         purchase.courseId._id,
         { $addToSet: { enrolledStudents: purchase.userId } },
-        { new: true },
+        { returnDocument: "after" },
       );
     } catch (error) {
       console.log("Error handeling ever:", error);

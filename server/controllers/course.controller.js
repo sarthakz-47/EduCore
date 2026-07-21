@@ -34,7 +34,6 @@ export const createCourse = async (req, res) => {
 export const searchCourse = async (req, res) => {
   try {
     const { query = "", categories = [], sortByPrice = "" } = req.query;
-    console.log(categories);
 
     // create search query
     const searchCriteria = {

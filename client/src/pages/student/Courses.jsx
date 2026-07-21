@@ -11,14 +11,24 @@ const Courses = () => {
     <div className="bg-gray-50 dark:bg-[#141414]">
       <div className="max-w-7xl mx-auto p-6">
         <h2 className="font-bold text-3xl text-center mb-10">Our Courses</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {isLoading
             ? Array.from({ length: 8 }).map((_, index) => (
-                <CourseSkeleton key={index} />
+                <div
+                  key={index}
+                  className="w-full md:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)]"
+                >
+                  <CourseSkeleton key={index} />
+                </div>
               ))
             : data?.courses &&
               data?.courses.map((course, index) => (
-                <Course key={index} course={course} />
+                <div
+                  key={index}
+                  className="w-full md:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)]"
+                >
+                  <Course key={index} course={course} />
+                </div>
               ))}
         </div>
       </div>
