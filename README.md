@@ -2,102 +2,92 @@
 
 A full-stack Learning Management System (LMS) where instructors can create and publish courses with video lectures, and students can browse, purchase, and track their progress through courses.
 
-Repo: [sarthakz-47/EduCore](https://github.com/sarthakz-47/EduCore)
+🔗 **Live Demo:** [educore-nk4m.onrender.com](https://educore-nk4m.onrender.com)
+_(hosted on a free server, so the first load may take up to a minute)_
 
 ## Features
 
-**Student**
-- Register / login with secure JWT (httpOnly cookie) authentication
-- Browse and search published courses with category and price filters
-- View course details and preview free lectures
-- Purchase courses via Stripe Checkout
-- Track lecture-by-lecture progress and mark courses complete / incomplete
-- "My Learning" dashboard of enrolled courses
+**For Students**
+
+- Sign up / log in securely (JWT authentication)
+- Browse, search, and filter courses
+- Purchase courses with Stripe
+- Track progress lecture-by-lecture
+- "My Learning" dashboard for enrolled courses
 - Editable profile with photo upload
 
-**Instructor**
-- Admin dashboard with sidebar navigation
-- Create, edit, publish / unpublish courses
-- Rich text course descriptions (Quill editor)
-- Add, edit, and remove lectures with video upload
-- Toggle free preview per lecture
-- Course thumbnail upload
+**For Instructors**
+
+- Admin dashboard to manage courses
+- Create/edit courses with rich text descriptions
+- Upload video lectures and thumbnails
+- Publish or unpublish courses
+- Toggle free preview lectures
 
 ## Tech Stack
 
-**Frontend**
-- React 19 + Vite
-- Redux Toolkit & RTK Query
-- React Router v7
-- Tailwind CSS v4 + shadcn/ui (Radix primitives)
-- React Quill (rich text editor)
-- React Player
+**Frontend:** React, Redux Toolkit, React Router, Tailwind CSS, shadcn/ui
 
-**Backend**
-- Node.js + Express 5
-- MongoDB + Mongoose
-- JSON Web Tokens (JWT) for auth
-- bcryptjs for password hashing
-- Multer for file uploads
-- Cloudinary for media storage (images / videos)
-- Stripe for payments
+**Backend:** Node.js, Express, MongoDB, Mongoose
 
-## Project Structure
+**Other Tools:** JWT (authentication), Cloudinary (media storage), Stripe (payments)
+
+**Deployment:** Render
+
+## Demo Credentials
+
+You can try the app directly without signing up, using either of these accounts:
+
+| Role    | Email            | Password |
+| ------- | ---------------- | -------- |
+| Student | adarsh@gmail.com | Pass@123 |
+
+**Note:** Payments run in Stripe **test mode** — no real money is charged. Use this test card at checkout:
 
 ```
-EduCore/
-├── client/                     # React frontend
-│   └── src/
-│       ├── app/                # Redux store & root reducer
-│       ├── components/         # Shared components + shadcn/ui primitives
-│       ├── features/           # RTK Query API slices & auth slice
-│       ├── layout/              # App layout wrapper
-│       ├── lib/                # Utility helpers
-│       └── pages/
-│           ├── admin/          # Instructor dashboard, course & lecture management
-│           └── student/        # Course browsing, purchase, progress, profile
-└── server/                     # Express backend
-    ├── controllers/            # Route handlers (course, purchase, progress, user)
-    ├── database/                # MongoDB connection
-    ├── middlewares/            # Auth middleware
-    ├── models/                 # Mongoose schemas
-    ├── routes/                 # API route definitions
-    └── utils/                  # Cloudinary, Multer, JWT helpers
+Card number: 4242 4242 4242 4242
+Expiry: any future date
+CVC: any 3 digits
 ```
 
-## API Overview
+## Screenshots
 
-| Base Route          | Responsibility                                        |
-|----------------------|---------------------------------------------------------|
-| `/api/v1/user`       | Register, login, logout, profile                        |
-| `/api/v1/course`     | CRUD for courses & lectures, publish toggle, search      |
-| `/api/v1/media`      | Video / image upload to Cloudinary                       |
-| `/api/v1/purchase`   | Stripe checkout session, webhook, purchase status         |
-| `/api/v1/progress`   | Lecture view tracking, mark complete / incomplete         |
+### Homepage
+
+![Homepage](assets/HomePage.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](assets/Dashboard.png)
+
+### Checkout
+
+![Checkout](assets/Checkout.png)
+
+### Course Details
+
+![Course Details](assets/CourseDetail.png)
 
 ## Getting Started
 
-### Prerequisites
-- Node.js (v18+)
-- MongoDB instance (local or Atlas)
-- Cloudinary account
-- Stripe account
-
-### 1. Clone the repo
 ```bash
+# Clone the repo
 git clone https://github.com/sarthakz-47/EduCore.git
 cd EduCore
-```
 
-### 2. Server setup
-```bash
-cd server
+# Install dependencies
 npm install
+npm install --prefix client
+
+# Add environment variables (see below), then run:
+npm run dev              # starts backend
+cd client && npm run dev # starts frontend (in a new terminal)
 ```
 
-Create a `.env` file in `server/` with:
+**Environment variables** (create a `.env` file in the root folder):
+
 ```env
-PORT=3000
+PORT=8080
 MONGO_URI=your_mongodb_connection_string
 SECRET_KEY=your_jwt_secret
 CLOUD_NAME=your_cloudinary_cloud_name
@@ -107,22 +97,14 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 WEBHOOK_ENDPOINT_SECRET=your_stripe_webhook_secret
 ```
 
-Run the server:
-```bash
-npm run dev
-```
+## What I Learned
 
-### 3. Client setup
-```bash
-cd client
-npm install
-npm run dev
-```
+- Building a full-stack app with a React frontend and an Express/MongoDB backend
+- Implementing secure authentication with JWT and httpOnly cookies
+- Integrating third-party services: Stripe for payments, Cloudinary for media
+- Deploying a full-stack app as a single service on Render
+- Debugging real deployment issues — CORS, cross-origin cookies, and verifying Stripe webhook signatures correctly
 
-The client runs on `http://localhost:5173` and expects the API at `http://localhost:3000` (CORS is configured for this origin in `server/index.js`).
+## License
 
-### 4. Stripe webhook (local testing)
-Use the [Stripe CLI](https://stripe.com/docs/stripe-cli) to forward events to your local server:
-```bash
-stripe listen --forward-to localhost:3000/api/v1/purchase/webhook
-```
+This project currently has no explicit license.
